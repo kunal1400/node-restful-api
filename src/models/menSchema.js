@@ -4,31 +4,45 @@ const MenSchema = new mongoose.Schema({
     ranking: {
         type: Number,
         unique: true,
-        required: true
+        required: true,
+        min: 1,
+        max: 1000
     },
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        lowercase: true
     },
     dob: {
         type: Date,
         required: true,
         trim: true
+    },    
+    createdAt: {
+        type: Date,
+        default: Date.now()
     },
-    country: {
-        type: String,
-        trim: true,
+    addedBy: {
+        type: mongoose.SchemaTypes.ObjectId,
         required: true
     },
-    score: {
-        type: Number,
-        required: true,
-        trim: true
+    isActive: {
+        type: Boolean,
+        required: true
     },
-    event: {
-        type: String,
-        default: "100m"
+    rankingBuffer: {
+        type: Buffer,
+    },
+    eventsPlayed: {
+        type: [String]
+    },
+    socialMediaHandle: {
+        type: Map,
+        of: Number
+    },
+    mixedObject: {
+        type: mongoose.SchemaTypes.Mixed
     }
 })
 
